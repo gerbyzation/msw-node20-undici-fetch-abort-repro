@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "msw": "1"
+    "msw": "^2.3.1"
   },
   "engines": {
     "node": "20"

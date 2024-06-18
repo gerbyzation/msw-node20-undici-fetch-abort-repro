@@ -1,14 +1,24 @@
-import { rest } from "msw";
 import { setupServer } from "msw/node";
+import { http, HttpResponse } from "msw";
 
 const server = setupServer();
 server.listen();
 
 const url = "https://www.google.com/";
 
+async function timeout(delay) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, delay);
+  });
+}
+
 server.use(
-  rest.get(url, (req, res, ctx) => {
-    return res(ctx.delay(1000), ctx.json({ success: true }));
+  http.get(url, async () => {
+    await timeout(1000);
+    console.log("sending response");
+    return HttpResponse.json({
+      success: true,
+    });
   })
 );
 
